@@ -3,7 +3,7 @@ import './componentlist.css';
 import Item from "./ComponentItem/componentitem"
 
 
-function List() {
+const List = () => {
     return (
         <ul className="list-group pull-down" id="contact-list">
             <Item />
