@@ -9,7 +9,7 @@ class Item extends Component {
         phone: "(097)888-21-12",
         email: "tyson@ukr.net",
         avatar: 16,
-        gender: "men"
+        gender: "men",
     };
 
     onRandomAvatar = () => {
@@ -19,9 +19,23 @@ class Item extends Component {
         });
     }
 
+    onFavorite = () => {
+        const favoriteStyle = "fas fa-star fa-2x";
+        this.setState({
+            favorite: favoriteStyle
+        });
+    }
+
     render() {
         const { name, address, phone, email, avatar, gender } = this.state;
         const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
+        const favorite = "far fa-star fa-2x";
+        if (favorite === false) {
+            this.setState();
+        }
+        else {
+
+        }
         return (
             <Fragment>
                 <li className="list-group-item">
@@ -50,6 +64,7 @@ class Item extends Component {
                     </div>
                 </li>
                 <button className="btn btn-success" onClick={this.onRandomAvatar}>Random avatar</button>
+                <i className={favorite} onClick={this.onFavorite}></i>
             </Fragment>
         );
     }
