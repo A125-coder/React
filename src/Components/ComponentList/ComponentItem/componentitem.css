@@ -2,6 +2,7 @@
     position: relative;
     color: rgb(250, 213, 48);
     top: -185px;
-    left: 885px;
+    left: 1065px;
     cursor: pointer;
+    display: block;
 }

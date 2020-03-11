@@ -4,12 +4,13 @@ import './componentitem.css';
 class Item extends Component {
 
     state = {
-        name: "Mike Tyson",
-        address: "Harm, Stepana Banderu str.",
-        phone: "(097)888-21-12",
-        email: "tyson@ukr.net",
-        avatar: 16,
-        gender: "men",
+        name: this.props.name,
+        address: this.props.address,
+        phone: this.props.phone,
+        email: this.props.email,
+        avatar: this.props.avatar,
+        gender: this.props.gender,
+        favorite: this.props.favorite
     };
 
     onRandomAvatar = () => {
@@ -20,22 +21,24 @@ class Item extends Component {
     }
 
     onFavorite = () => {
-        const favoriteStyle = "fas fa-star fa-2x";
+        let favorite = this.state.favorite;
         this.setState({
-            favorite: favoriteStyle
+            favorite: !favorite
         });
+        this.props.onStarChange(this.state.id);
     }
 
     render() {
-        const { name, address, phone, email, avatar, gender } = this.state;
+        const { name, address, phone, email, avatar, gender, favorite } = this.state;
         const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
-        const favorite = "far fa-star fa-2x";
-        if (favorite === false) {
-            this.setState();
+        var favoriteStyle = "fas fa-star fa-2x";
+        if (favorite) {
+            favoriteStyle = "fas fa-star fa-2x"
         }
         else {
-
+            favoriteStyle = "far fa-star fa-2x"
         }
+        console.log("Item =>", this.props);
         return (
             <Fragment>
                 <li className="list-group-item">
@@ -64,7 +67,7 @@ class Item extends Component {
                     </div>
                 </li>
                 <button className="btn btn-success" onClick={this.onRandomAvatar}>Random avatar</button>
-                <i className={favorite} onClick={this.onFavorite}></i>
+                <i className="far fa-star fa-2x" onClick={this.props.onStarChange}></i>
             </Fragment>
         );
     }
