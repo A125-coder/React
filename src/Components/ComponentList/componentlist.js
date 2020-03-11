@@ -4,6 +4,7 @@ import Item from "./ComponentItem/componentitem"
 
 
 const List = ({ list, onStarChange }) => {
+    console.log("List => ", list);
     const item = list.map(item => {
         return <Item
             key={item.id}

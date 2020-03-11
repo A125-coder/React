@@ -21,24 +21,23 @@ class Item extends Component {
     }
 
     onFavorite = () => {
-        let favorite = this.state.favorite;
-        this.setState({
-            favorite: !favorite
-        });
-        this.props.onStarChange(this.state.id);
+        // let favorite = this.state.favorite;
+        // this.setState({
+        //     favotite: !favorite
+        // });
+        // this.props.onStarChange(this.state.id);
     }
 
     render() {
         const { name, address, phone, email, avatar, gender, favorite } = this.state;
         const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
-        var favoriteStyle = "fas fa-star fa-2x";
         if (favorite) {
-            favoriteStyle = "fas fa-star fa-2x"
+            var favoriteStyle = "fas fa-star"
         }
         else {
-            favoriteStyle = "far fa-star fa-2x"
+            favoriteStyle = "far fa-star"
         }
-        console.log("Item =>", this.props);
+        // console.log("Item =>", this.props);
         return (
             <Fragment>
                 <li className="list-group-item">
@@ -50,7 +49,12 @@ class Item extends Component {
                         </div>
 
                         <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-
+                            <span
+                                className="fa fa-mobile fa-2x text-success float-right pulse"
+                                title="online now"
+                            >
+                                <i className={favoriteStyle} onClick={this.props.onStarChange}></i>
+                            </span>
                             <span className="name lead">{name}</span>
                             <br></br>
                             <span className="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5267 Cackson St"></span>
@@ -67,7 +71,6 @@ class Item extends Component {
                     </div>
                 </li>
                 <button className="btn btn-success" onClick={this.onRandomAvatar}>Random avatar</button>
-                <i className="far fa-star fa-2x" onClick={this.props.onStarChange}></i>
             </Fragment>
         );
     }

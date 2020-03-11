@@ -15,7 +15,7 @@ class App extends React.Component {
                 email: "rosemary.porter@example.com",
                 avatar: 16,
                 gender: "women",
-                favorite: true
+                favorite: false
             },
             {
                 id: 1,
