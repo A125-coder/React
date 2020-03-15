@@ -15,7 +15,7 @@ class App extends React.Component {
                 email: "rosemary.porter@example.com",
                 avatar: 16,
                 gender: "women",
-                favorite: false
+                favorite: true
             },
             {
                 id: 1,
@@ -58,19 +58,23 @@ class App extends React.Component {
                 favorite: false
             }]
     }
+
+
     onStarChange = (id) => {
         console.log("onStarChange", id);
-    }
+    };
 
 
     render() {
-        console.log(this.state.list);
         return (
             <div className="container">
                 <div id="card_contacts">
                     <div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
                         <h1>Contact List App</h1>
-                        <List list={this.state.list} onStarChange={this.onStarChange} />
+                        <List
+                            list={this.state.list}
+                            onStarChange={this.onStarChange} 
+                        />
                     </div>
                 </div>
             </div>

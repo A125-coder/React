@@ -23,21 +23,21 @@ class Item extends Component {
     onFavorite = () => {
         // let favorite = this.state.favorite;
         // this.setState({
-        //     favotite: !favorite
+        //     favorite: !favorite
         // });
-        // this.props.onStarChange(this.state.id);
+        // this.props.onStarChange();
     }
 
     render() {
         const { name, address, phone, email, avatar, gender, favorite } = this.state;
         const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
         if (favorite) {
-            var favoriteStyle = "fas fa-star"
+            var favoriteStyle = "fas fa-star";
         }
         else {
-            favoriteStyle = "far fa-star"
+            favoriteStyle = "far fa-star";
         }
-        // console.log("Item =>", this.props);
+        // console.log("Item props =>", this.props);
         return (
             <Fragment>
                 <li className="list-group-item">
@@ -53,7 +53,9 @@ class Item extends Component {
                                 className="fa fa-mobile fa-2x text-success float-right pulse"
                                 title="online now"
                             >
-                                <i className={favoriteStyle} onClick={this.props.onStarChange}></i>
+                                <i className={favoriteStyle}
+                                    aria-hidden="true"
+                                    onClick={this.props.onStarChange}></i>
                             </span>
                             <span className="name lead">{name}</span>
                             <br></br>
