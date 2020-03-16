@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import List from './Components/ComponentList/componentlist';
+import AddContact from "./Components/ComponentList/Add Contact/AddContact"
 
 class App extends React.Component {
-
+    currentID = 1000;
     state = {
         list: [
             {
@@ -59,11 +60,39 @@ class App extends React.Component {
             }]
     }
 
-
     onStarChange = (id) => {
-        console.log("onStarChange", id);
+        // console.log("onStarChange", id);
+        this.setState(state => {
+            const index = this.state.list.findIndex(elem => elem.id === id);
+            // console.log('Index = ', index);
+            const newStar = this.state.list.slice();
+            newStar[index].favorite = !newStar[index].favorite;
+            return {
+                favorite: !this.newStar
+            }
+        });
     };
 
+    onAddContact = (name, address, telNumber, email) => {
+        console.log("NewName = ", name);
+        console.log("NewAddress = ", address);
+        console.log("NewTelNumber = ", telNumber);
+        console.log("NewEmail = ", email);
+        let newContact = {
+            id: this.currentID++,
+            name: name,
+            address: address,
+            phone: telNumber,
+            email: email,
+            avatar: 16,
+            gender: "men",
+            favorite: false
+        }
+        console.log(newContact);
+        this.setState({
+
+        })
+    }
 
     render() {
         return (
@@ -73,8 +102,9 @@ class App extends React.Component {
                         <h1>Contact List App</h1>
                         <List
                             list={this.state.list}
-                            onStarChange={this.onStarChange} 
+                            onStarChange={this.onStarChange}
                         />
+                        <AddContact onAddContact={this.onAddContact} />
                     </div>
                 </div>
             </div>

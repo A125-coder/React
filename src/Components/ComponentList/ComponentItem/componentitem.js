@@ -21,17 +21,17 @@ class Item extends Component {
     }
 
     onFavorite = () => {
-        // let favorite = this.state.favorite;
-        // this.setState({
-        //     favorite: !favorite
-        // });
+        let favorite = this.state.favorite;
+        this.setState({
+            favorite: !favorite
+        });
         // this.props.onStarChange();
     }
 
     render() {
-        const { name, address, phone, email, avatar, gender, favorite } = this.state;
+        const { name, address, phone, email, avatar, gender } = this.state;
         const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
-        if (favorite) {
+        if (this.props.favorite) {
             var favoriteStyle = "fas fa-star";
         }
         else {
@@ -55,7 +55,8 @@ class Item extends Component {
                             >
                                 <i className={favoriteStyle}
                                     aria-hidden="true"
-                                    onClick={this.props.onStarChange}></i>
+                                    onClick={this.props.onStarChange}
+                                ></i>
                             </span>
                             <span className="name lead">{name}</span>
                             <br></br>
