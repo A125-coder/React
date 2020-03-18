@@ -5,9 +5,10 @@ class AddContact extends React.Component {
     state = {
         name: null,
         address: null,
-        gender: "men",
+        gender: null,
         telNumber: null,
-        email: null
+        email: null,
+        avatar: null
     };
 
 
@@ -32,28 +33,40 @@ class AddContact extends React.Component {
         })
     }
 
-    onSubmit = (event) => {
+    getAvatar = event => {
+        this.setState({
+            avatar: event.target.value
+        })
+    }
+
+    onSendData = (event) => {
         event.preventDefault();
         // console.log("onSubmit ", this.state.name);
         // console.log("onSubmit ", this.state.address);
+        const { name, address, telNumber, email, avatar } = this.state
         this.props.onAddContact(
-            this.state.name,
-            this.state.address,
-            this.state.telNumber,
-            this.state.email
+            name,
+            address,
+            telNumber,
+            email,
+            avatar
         );
     };
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.onSubmit}>
+            <div className="container">
+                <form onSubmit={this.onSendData}>
                     <input type="text" placeholder="Name" className="form-control" onChange={this.getName} />
                     <input type="text" placeholder="Address" className="form-control" onChange={this.getAddress} />
+                    <input type="number"
+                        min="1"
+                        max="99"
+                        placeholder="Avatar" className="form-control" onChange={this.getAvatar} />
                     <input type="text" placeholder="Tel Number" className="form-control" onChange={this.getTelNumber} />
                     <input type="text" placeholder="Email" className="form-control" onChange={this.getEmail} />
-                    <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" />
-                    <label htmlFor="gender_men" className="form-check-lable">Men</label><br />
+                    {/* <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" />
+                    <label htmlFor="gender_men" className="form-check-lable">Men</label><br /> */}
                     <button className="btn btn-success" type="submit">Add new contact</button>
                 </form>
             </div>

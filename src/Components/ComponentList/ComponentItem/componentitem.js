@@ -32,10 +32,10 @@ class Item extends Component {
         const { name, address, phone, email, avatar, gender } = this.state;
         const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
         if (this.props.favorite) {
-            var favoriteStyle = "fas fa-star";
+            var favoriteStyle = "fas fa-star fa-2x";
         }
         else {
-            favoriteStyle = "far fa-star";
+            favoriteStyle = "far fa-star fa-2x";
         }
         // console.log("Item props =>", this.props);
         return (
@@ -49,24 +49,29 @@ class Item extends Component {
                         </div>
 
                         <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
+                        <span
+                                className="fas fa-trash-alt fa-2x text-danger float-right pulse"
+                                title="Delete"
+                                onClick={this.props.onDeleteContact}
+                            ></span>
                             <span
-                                className="fa fa-mobile fa-2x text-success float-right pulse"
-                                title="online now"
+                                className="float-right pulse"
                             >
                                 <i className={favoriteStyle}
                                     aria-hidden="true"
                                     onClick={this.props.onStarChange}
+                                    title="Favorite"
                                 ></i>
                             </span>
                             <span className="name lead">{name}</span>
                             <br></br>
-                            <span className="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="5267 Cackson St"></span>
+                            <span className="fa fa-map-marker fa-fw text-muted" data-toggle="tooltip" title="" data-original-title={address}></span>
                             <span className="text-muted">{address}</span>
                             <br></br>
-                            <span className="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="(497) 160-9776"></span>
+                            <span className="fa fa-phone fa-fw text-muted" data-toggle="tooltip" title="" data-original-title={phone}></span>
                             <span className="text-muted small">{phone}</span>
                             <br></br>
-                            <span className="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" title="" data-original-title="rosemary.porter@example.com"></span>
+                            <span className="fa fa-envelope fa-fw text-muted" data-toggle="tooltip" title="" data-original-title={email}></span>
                             <span className="text-muted small text-truncate">{email}</span>
                             <br></br>
 

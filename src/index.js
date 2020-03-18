@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import uuid from "uuid"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './index.css';
 import List from './Components/ComponentList/componentlist';
 import AddContact from "./Components/ComponentList/Add Contact/AddContact"
 
+
 class App extends React.Component {
-    currentID = 1000;
     state = {
         list: [
             {
-                id: 0,
+                id: uuid(),
                 name: "Rosemary Porter",
                 address: "5267 Cackson St",
                 phone: "(497) 160-9776",
@@ -19,7 +21,7 @@ class App extends React.Component {
                 favorite: true
             },
             {
-                id: 1,
+                id: uuid(),
                 name: "Debbie Schmidt",
                 address: "3903 W Alexander Rd",
                 phone: "(867) 322-1852",
@@ -29,7 +31,7 @@ class App extends React.Component {
                 favorite: false
             },
             {
-                id: 2,
+                id: uuid(),
                 name: "Mike Anamendolla",
                 address: "5842 Hillcrest Rd",
                 phone: "(870) 288-4149",
@@ -39,7 +41,7 @@ class App extends React.Component {
                 favorite: false
             },
             {
-                id: 3,
+                id: uuid(),
                 name: "Seth Frazie",
                 address: "7396 E North St",
                 phone: "(560) 180-4143",
@@ -49,7 +51,7 @@ class App extends React.Component {
                 favorite: false
             },
             {
-                id: 4,
+                id: uuid(),
                 name: "Mike Tyson",
                 address: "Harm, Stepana Banderu str.",
                 phone: "(097)888-21-12",
@@ -57,7 +59,8 @@ class App extends React.Component {
                 avatar: 16,
                 gender: "men",
                 favorite: false
-            }]
+            }
+        ]
     }
 
     onStarChange = (id) => {
@@ -73,38 +76,73 @@ class App extends React.Component {
         });
     };
 
-    onAddContact = (name, address, telNumber, email) => {
-        console.log("NewName = ", name);
-        console.log("NewAddress = ", address);
-        console.log("NewTelNumber = ", telNumber);
-        console.log("NewEmail = ", email);
+    onAddContact = (name, address, telNumber, email, avatar) => {
+        // console.log("NewName = ", name);
+        // console.log("NewAddress = ", address);
+        // console.log("NewTelNumber = ", telNumber);
+        // console.log("NewEmail = ", email);
         let newContact = {
-            id: this.currentID++,
+            id: uuid(),
             name: name,
             address: address,
             phone: telNumber,
             email: email,
-            avatar: 16,
-            gender: "men",
-            favorite: false
+            avatar: avatar,
+            gender: "women",
+            favorite: false,
         }
-        console.log(newContact);
-        this.setState({
-
-        })
+        const newList = [...this.state.list, newContact];
+        // console.log(newList);
+        this.setState(state => {
+            return { list: newList }
+        });
     }
+
+    onDeleteContact = id => {
+        const index = this.state.list.findIndex(elem => elem.id === id);
+        // console.log("Delete Contact", id);
+        // console.log("Delete Contact Index = ", index);
+        const partOne = this.state.list.slice(0, index);
+        const partTwo = this.state.list.slice(index + 1);
+        const newList = [...partOne, ...partTwo];
+        // console.log(newList)
+        this.setState(state => {
+            return {
+                list: newList
+            }
+        })
+    };
 
     render() {
         return (
             <div className="container">
                 <div id="card_contacts">
                     <div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
-                        <h1>Contact List App</h1>
+                        {/* <nav>
+                            <ul>
+                                <li>
+                                    <a href="/contact">Contacts</a>
+                                </li>
+                            </ul>
+                        </nav> */}
+                        {/* Вставити компонент Header замість <nav> */}
+                        <Router>
+                            <Switch>
+                                <Route path="/" exact render={() => (<List list={this.state.list} onStarChange={this.onStarChange} onDeleteContact={this.onDeleteContact} />)} />
+                                <Route path="/contact" exact render={() => <AddContact
+                                    onAddContact={this.onAddContact}
+                                />} />
+                            </Switch>
+                        </Router>
+                        {/* <h1>Contact List App</h1>
                         <List
                             list={this.state.list}
                             onStarChange={this.onStarChange}
+                            onDeleteContact={this.onDeleteContact}
                         />
-                        <AddContact onAddContact={this.onAddContact} />
+                        <AddContact
+                            onAddContact={this.onAddContact}
+                        /> */}
                     </div>
                 </div>
             </div>

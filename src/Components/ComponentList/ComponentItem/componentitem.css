@@ -2,3 +2,9 @@
     color: rgb(250, 213, 48);
     cursor: pointer;
 }
+.btn-success{
+    width: 23%;
+}
+.fa-trash-alt{
+    cursor: pointer;
+}

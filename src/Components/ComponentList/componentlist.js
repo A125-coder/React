@@ -3,7 +3,7 @@ import './componentlist.css';
 import Item from "./ComponentItem/componentitem"
 
 
-const List = ({ list, onStarChange }) => {
+const List = ({ list, onStarChange, onDeleteContact }) => {
     // console.log("List => ", list);
     const item = list.map(item => {
         return <Item
@@ -16,13 +16,15 @@ const List = ({ list, onStarChange }) => {
             email={item.email}
             favorite={item.favorite}
             onStarChange={() => onStarChange(item.id)}
+            onDeleteContact={() => onDeleteContact(item.id)}
         />;
     })
 
+
     return (
-            <ul className="list-group pull-down" id="contact-list">
-                {item}
-            </ul>
+        <ul className="list-group pull-down" id="contact-list">
+            {item}
+        </ul>
     );
 }
 
