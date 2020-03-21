@@ -4,7 +4,8 @@ import uuid from "uuid"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './index.css';
 import List from './Components/ComponentList/componentlist';
-import AddContact from "./Components/ComponentList/Add Contact/AddContact"
+import AddContact from "./Components/ComponentList/Add Contact/AddContact";
+import Header from "./Components/Header/header"
 
 
 class App extends React.Component {
@@ -118,14 +119,7 @@ class App extends React.Component {
             <div className="container">
                 <div id="card_contacts">
                     <div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
-                        {/* <nav>
-                            <ul>
-                                <li>
-                                    <a href="/contact">Contacts</a>
-                                </li>
-                            </ul>
-                        </nav> */}
-                        {/* Вставити компонент Header замість <nav> */}
+                        <Header />
                         <Router>
                             <Switch>
                                 <Route path="/" exact render={() => (<List list={this.state.list} onStarChange={this.onStarChange} onDeleteContact={this.onDeleteContact} />)} />
