@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import './componentitem.css';
+import { Link } from "react-router-dom";
 
 class Item extends Component {
 
@@ -49,11 +50,16 @@ class Item extends Component {
                         </div>
 
                         <div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
-                        <span
+                            <span
                                 className="fas fa-trash-alt fa-2x text-danger float-right pulse"
                                 title="Delete"
                                 onClick={this.props.onDeleteContact}
                             ></span>
+                            <Link to="/edit"
+                                className="fas fa-edit fa-2x text-success float-right pulse"
+                                title="Edit"
+                                onClick={this.props.onEditContact}
+                            ></Link>
                             <span
                                 className="float-right pulse"
                             >

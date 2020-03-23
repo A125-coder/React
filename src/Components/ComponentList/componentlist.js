@@ -3,7 +3,7 @@ import './componentlist.css';
 import Item from "./ComponentItem/componentitem"
 
 
-const List = ({ list, onStarChange, onDeleteContact }) => {
+const List = ({ list, onStarChange, onDeleteContact, onEditContact }) => {
     // console.log("List => ", list);
     const item = list.map(item => {
         return <Item
@@ -17,6 +17,7 @@ const List = ({ list, onStarChange, onDeleteContact }) => {
             favorite={item.favorite}
             onStarChange={() => onStarChange(item.id)}
             onDeleteContact={() => onDeleteContact(item.id)}
+            onEditContact={() => onEditContact(item.id)}
         />;
     })
 

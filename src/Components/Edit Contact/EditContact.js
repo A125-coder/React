@@ -1,15 +1,16 @@
 import React from "react";
-import "./AddContact.css";
+import "./EditContact.css";
 import { Redirect } from "react-router-dom";
 
-class AddContact extends React.Component {
+class EditContact extends React.Component {
     state = {
-        name: null,
-        address: null,
-        gender: null,
-        telNumber: null,
-        email: null,
-        avatar: null,
+        id: this.props.currentContact.id,
+        name: this.props.currentContact.name,
+        address: this.props.currentContact.address,
+        gender: this.props.currentContact.gender,
+        telNumber: this.props.currentContact.phone,
+        email: this.props.currentContact.email,
+        avatar: this.props.currentContact.avatar,
         isRedirect: false
     };
 
@@ -45,8 +46,9 @@ class AddContact extends React.Component {
         event.preventDefault();
         // console.log("onSubmit ", this.state.name);
         // console.log("onSubmit ", this.state.address);
-        const { name, address, telNumber, email, avatar } = this.state
-        this.props.onAddContact(
+        const { id, name, address, telNumber, email, avatar } = this.state;
+        this.props.onEditCurrentContact(
+            id,
             name,
             address,
             telNumber,
@@ -59,23 +61,25 @@ class AddContact extends React.Component {
     };
 
     render() {
+        const { name, address, email, telNumber, gender, avatar } = this.state
+        // console.log("Current Contact =>", this.props)
         if (this.state.isRedirect) {
             return <Redirect to="/" />
         }
         return (
             <div className="container">
                 <form onSubmit={this.onSendData}>
-                    <input type="text" placeholder="Name" className="form-control" onChange={this.getName} />
-                    <input type="text" placeholder="Address" className="form-control" onChange={this.getAddress} />
+                    <input type="text" placeholder={name} className="form-control" onChange={this.getName} />
+                    <input type="text" placeholder={address} className="form-control" onChange={this.getAddress} />
                     <input type="number"
                         min="1"
                         max="99"
-                        placeholder="Avatar" className="form-control" onChange={this.getAvatar} />
-                    <input type="text" placeholder="Tel Number" className="form-control" onChange={this.getTelNumber} />
-                    <input type="text" placeholder="Email" className="form-control" onChange={this.getEmail} />
+                        placeholder={avatar} className="form-control" onChange={this.getAvatar} />
+                    <input type="text" placeholder={telNumber} className="form-control" onChange={this.getTelNumber} />
+                    <input type="text" placeholder={email} className="form-control" onChange={this.getEmail} />
                     {/* <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" />
                     <label htmlFor="gender_men" className="form-check-lable">Men</label><br /> */}
-                    <button className="btn btn-success" type="submit">Add new contact</button>
+                    <button className="btn btn-success" type="submit">Save changes</button>
                 </form>
             </div>
         )
@@ -83,4 +87,4 @@ class AddContact extends React.Component {
 }
 
 
-export default AddContact;
+export default EditContact;

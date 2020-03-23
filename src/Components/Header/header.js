@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import './header.css';
+import { Link } from "react-router-dom"
 
 const Header = () => {
     return (
@@ -7,10 +8,10 @@ const Header = () => {
             <header className="navbar navbar-expand-lg navbar-light">
                 <ul className="navbar-nav mr-auto">
                     <li className="btn-outline-success my-2 my-sm-0" id="head">
-                        <a className="nav-link" href="/">Contact List</a>
+                        <Link className="nav-link" to="/">Contact List</Link>
                     </li>
                     <li className="btn-outline-success my-2 my-sm-0" id="head">
-                        <a className="nav-link" href="/contact">Add contact</a>
+                        <Link className="nav-link" to="/contact">Add contact</Link>
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
