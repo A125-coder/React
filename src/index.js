@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import uuid from "uuid"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import './index.css';
 import List from './Components/ComponentList/componentlist';
 import AddContact from "./Components/ComponentList/Add Contact/AddContact";
 import Header from "./Components/Header/header"
 import EditContact from "./Components/Edit Contact/EditContact"
-
+import Error from "./Components/Error/error"
+import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 
 class App extends React.Component {
     state = {
@@ -160,7 +160,7 @@ class App extends React.Component {
                                 />} />
                                 <Route path="/edit" exact render={() => <EditContact currentContact={this.state.currentContact} onEditCurrentContact={this.onEditCurrentContact}
                                 />} />
-                                <Route />
+                                <Route path="*" exact={true} component={withRouter(Error)} />
                             </Switch>
                         </Router>
                         {/* <h1>Contact List App</h1>
