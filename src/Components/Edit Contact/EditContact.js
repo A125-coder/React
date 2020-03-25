@@ -69,14 +69,14 @@ class EditContact extends React.Component {
         return (
             <div className="container">
                 <form onSubmit={this.onSendData}>
-                    <input type="text" placeholder={name} className="form-control" onChange={this.getName} />
-                    <input type="text" placeholder={address} className="form-control" onChange={this.getAddress} />
+                    <input type="text" value={name} className="form-control" onChange={this.getName} />
+                    <input type="text" value={address} className="form-control" onChange={this.getAddress} />
                     <input type="number"
                         min="1"
                         max="99"
-                        placeholder={avatar} className="form-control" onChange={this.getAvatar} />
-                    <input type="text" placeholder={telNumber} className="form-control" onChange={this.getTelNumber} />
-                    <input type="text" placeholder={email} className="form-control" onChange={this.getEmail} />
+                        value={avatar} className="form-control" onChange={this.getAvatar} />
+                    <input type="text" value={telNumber} className="form-control" onChange={this.getTelNumber} />
+                    <input type="text" value={email} className="form-control" onChange={this.getEmail} />
                     {/* <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" />
                     <label htmlFor="gender_men" className="form-check-lable">Men</label><br /> */}
                     <button className="btn btn-success" type="submit">Save changes</button>
