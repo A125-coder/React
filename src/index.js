@@ -32,9 +32,16 @@ class App extends React.Component {
             return response.json();
         })
             .then(list => {
+                if(list===null){
+                    this.setState({
+                        list: []
+                    });
+                }
+                else{
                 this.setState({
                     list: list
                 })
+            }
             })
             .catch(err => console.log(err));
     }

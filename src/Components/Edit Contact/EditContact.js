@@ -51,7 +51,7 @@ class EditContact extends React.Component {
         event.preventDefault();
         // console.log("onSubmit ", this.state.name);
         // console.log("onSubmit ", this.state.address);
-        const { id, name, address, telNumber, email, avatar,gender } = this.state;
+        const { id, name, address, telNumber, email, avatar, gender } = this.state;
         this.props.onEditCurrentContact(
             id,
             name,

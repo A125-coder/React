@@ -24,7 +24,7 @@ const List = ({ list, onStarChange, onDeleteContact, onEditContact }) => {
 
     return (
         <ul className="list-group pull-down" id="contact-list">
-            {item}
+            {item.length !== 0 ? item : <h2>Contact List is Empty</h2>}
         </ul>
     );
 }
