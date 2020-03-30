@@ -41,19 +41,25 @@ class EditContact extends React.Component {
             avatar: event.target.value
         })
     }
+    getGender = event => {
+        this.setState({
+            gender: event.target.value
+        })
+    }
 
     onSendData = (event) => {
         event.preventDefault();
         // console.log("onSubmit ", this.state.name);
         // console.log("onSubmit ", this.state.address);
-        const { id, name, address, telNumber, email, avatar } = this.state;
+        const { id, name, address, telNumber, email, avatar,gender } = this.state;
         this.props.onEditCurrentContact(
             id,
             name,
             address,
             telNumber,
             email,
-            avatar
+            avatar,
+            gender
         );
         this.setState({
             isRedirect: true
@@ -61,7 +67,7 @@ class EditContact extends React.Component {
     };
 
     render() {
-        const { name, address, email, telNumber, gender, avatar } = this.state
+        const { name, address, email, telNumber, avatar } = this.state
         // console.log("Current Contact =>", this.props)
         if (this.state.isRedirect) {
             return <Redirect to="/" />
@@ -77,8 +83,10 @@ class EditContact extends React.Component {
                         value={avatar} className="form-control" onChange={this.getAvatar} />
                     <input type="text" value={telNumber} className="form-control" onChange={this.getTelNumber} />
                     <input type="text" value={email} className="form-control" onChange={this.getEmail} />
-                    {/* <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" />
-                    <label htmlFor="gender_men" className="form-check-lable">Men</label><br /> */}
+                    <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" onChange={this.getGender} />
+                    <label htmlFor="gender_men" className="form-check-lable">Men</label><br />
+                    <input type="radio" name="gender" className="form-check-input" value="women" id="gender_women" onChange={this.getGender} />
+                    <label htmlFor="gender_women" className="form-check-lable">Women</label><br />
                     <button className="btn btn-success" type="submit">Save changes</button>
                 </form>
             </div>

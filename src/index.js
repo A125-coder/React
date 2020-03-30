@@ -110,7 +110,21 @@ class App extends React.Component {
         });
     };
 
-    onAddContact = (name, address, telNumber, email, avatar) => {
+    async onSaveData(newList) {
+        await fetch(this.URL, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newList)
+        }).then(response => {
+            console.log("Response =>", response);
+        }).catch(err => console.log("Catch =>", err.Message));
+        this.updateContactList();
+    };
+
+
+    onAddContact = (name, address, telNumber, email, avatar, gender) => {
         // console.log("NewName = ", name);
         // console.log("NewAddress = ", address);
         // console.log("NewTelNumber = ", telNumber);
@@ -122,14 +136,15 @@ class App extends React.Component {
             phone: telNumber,
             email: email,
             avatar: avatar,
-            gender: "women",
+            gender: gender,
             favorite: false,
         }
         const newList = [...this.state.list, newContact];
         // console.log(newList);
-        this.setState(state => {
-            return { list: newList }
-        });
+        // this.setState(state => {
+        //     return { list: newList };
+        // });
+        this.onSaveData(newList);
     }
 
     onDeleteContact = id => {
@@ -140,11 +155,12 @@ class App extends React.Component {
         const partTwo = this.state.list.slice(index + 1);
         const newList = [...partOne, ...partTwo];
         // console.log(newList)
-        this.setState(state => {
-            return {
-                list: newList
-            }
-        })
+        // this.setState(state => {
+        //     return {
+        //         list: newList
+        //     }
+        // });
+        this.onSaveData(newList);
     };
 
     onEditContact = id => {
@@ -156,7 +172,7 @@ class App extends React.Component {
         })
     };
 
-    onEditCurrentContact = (id, name, address, telNumber, email, avatar) => {
+    onEditCurrentContact = (id, name, address, telNumber, email, avatar, gender) => {
         const index = this.state.list.findIndex(elem => elem.id === id);
         let editedContact = {
             id: id,
@@ -165,7 +181,7 @@ class App extends React.Component {
             phone: telNumber,
             email: email,
             avatar: avatar,
-            gender: "women",
+            gender: gender,
             favorite: false,
         }
         const partOne = this.state.list.slice(0, index);
@@ -174,6 +190,7 @@ class App extends React.Component {
         this.setState({
             list: newList
         })
+        this.onSaveData(newList);
     }
 
     onSearch = contactName => {
