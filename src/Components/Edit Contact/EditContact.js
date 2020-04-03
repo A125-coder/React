@@ -67,28 +67,41 @@ class EditContact extends React.Component {
     };
 
     render() {
-        const { name, address, email, telNumber, avatar } = this.state
+        const { name, address, email, telNumber, gender, avatar } = this.state
         // console.log("Current Contact =>", this.props)
+        // console.log("Avatar => ", avatar);
+        const URL = `https://api.randomuser.me/portraits/${gender}/${avatar}.jpg`;
         if (this.state.isRedirect) {
             return <Redirect to="/" />
         }
         return (
-            <div className="container">
-                <form onSubmit={this.onSendData}>
-                    <input type="text" value={name} className="form-control" onChange={this.getName} />
-                    <input type="text" value={address} className="form-control" onChange={this.getAddress} />
-                    <input type="number"
-                        min="1"
-                        max="99"
-                        value={avatar} className="form-control" onChange={this.getAvatar} />
-                    <input type="text" value={telNumber} className="form-control" onChange={this.getTelNumber} />
-                    <input type="text" value={email} className="form-control" onChange={this.getEmail} />
-                    <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" onChange={this.getGender} />
-                    <label htmlFor="gender_men" className="form-check-lable">Men</label><br />
-                    <input type="radio" name="gender" className="form-check-input" value="women" id="gender_women" onChange={this.getGender} />
-                    <label htmlFor="gender_women" className="form-check-lable">Women</label><br />
-                    <button className="btn btn-success" type="submit">Save changes</button>
-                </form>
+            <div className="row">
+                <div className="col-md-10">
+                    <form onSubmit={this.onSendData}>
+                        <input type="text" value={name} className="form-control" onChange={this.getName} />
+                        <input type="text" value={address} className="form-control" onChange={this.getAddress} />
+                        <input type="number"
+                            min="1"
+                            max="99"
+                            value={avatar} className="form-control" onChange={this.getAvatar} />
+                        <input type="text" value={telNumber} className="form-control" onChange={this.getTelNumber} />
+                        <input type="text" value={email} className="form-control" onChange={this.getEmail} />
+                        <input type="radio" name="gender" className="form-check-input" value="men" id="gender_men" onChange={this.getGender} />
+                        <label htmlFor="gender_men" className="form-check-lable">Men</label><br />
+                        <input type="radio" name="gender" className="form-check-input" value="women" id="gender_women" onChange={this.getGender} />
+                        <label htmlFor="gender_women" className="form-check-lable">Women</label><br />
+                        <button className="btn btn-success" type="submit">Save changes</button>
+                    </form>
+                </div>
+                <div className="col-md-2">
+                    {avatar.length !== 0 ? (
+                        <img className="rounded-circle mx-auto d-block img-fluid edit_photo"
+                            src={URL} alt="avatar"
+                        />
+                    ) : (
+                            <h3>No foto</h3>
+                        )}
+                </div>
             </div>
         )
     }
